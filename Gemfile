@@ -42,5 +42,13 @@ group :development do
   gem "spring"
 end
 
+group :test do
+  gem "database_cleaner-active_record"
+  gem "database_cleaner-redis"
+  gem "factory_bot"
+  gem "rack-test"
+  gem "rspec-rails", "~> 4.0.1"
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
