@@ -4,7 +4,7 @@ class CreateDinosaurs < ActiveRecord::Migration[6.1]
   def up
     create_table :dinosaurs do |t|
       t.string :name
-      t.string :species
+      t.integer :species
       t.belongs_to :cage, null: true, foreign_key: true
       t.timestamps
     end
