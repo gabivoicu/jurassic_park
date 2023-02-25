@@ -1,24 +1,49 @@
-# README
+### The Stack - Server
+- Language
+  - Ruby 3.1.0
+  - Rails 6
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Development Getting Started
 
-Things you may want to cover:
+    # Clone and setup repo
+    git clone git@github.com:gabivoicu/jurassic_park.git
+    cd jurassic_park
 
-* Ruby version
+    # Install and setup server dependencies
+    bundle install
+    bundle exec rake db:create db:migrate
 
-* System dependencies
+## Run it
 
-* Configuration
+    # Backend (http://localhost:3000)
+    rails s
 
-* Database creation
+## Test It
 
-* Database initialization
+    # Setup test DB for testing
+    bundle exec rake db:migrate RAILS_ENV=test
 
-* How to run the test suite
+    # Run tests
+    bundle exec rspec
 
-* Services (job queues, cache servers, search engines, etc.)
+Manual testing can be done with a tool like [Postman](https://www.postman.com/downloads/).
 
-* Deployment instructions
+## Lint It
 
-* ...
+    bundle exec rubocop
+
+### On Challenge completion
+
+I ran out of time to add controller tests (but I tested all endpoints with Postman). 
+
+### Concurrent environment
+
+To use this app in a production environment I would:
+- containerize using something like Docker and deploy multiple instances
+- use AWS/Heroku to set up automated scaling and deploys where containers are replaced one after the other for stability
+- set up load balancer
+- use Parameter Store for safe storage and sharing across instances of environment variables
+- I would add authentication so that the API can only be accessed by authorized users
+
+### Additional thoughts
+- It would be useful to add a `max_capacity` value for Cages
