@@ -5,15 +5,18 @@ class Cage < ApplicationRecord
 
   HERBIVORE_ERROR_MESSAGE = "Herbivore dinosaurs can only be kept with other herbivores."
   CARNIVORE_ERROR_MESSAGE = "Carnivore dinosaurs can only be kept with their own species."
+  MAX_CAPACITY_ERROR_MESSAGE = "The number of dinosaurs is higher than this cages' max capacity."
 
   def self.create_new!(params)
     ActiveRecord::Base.transaction do
-      cage = create!
+      cage = create!(max_capacity: params[:max_capacity])
       cage.add_dinosaurs(params[:dinosaurs])
     end
   end
 
   def add_dinosaurs(dinosaur_ids)
+    raise ArgumentError, MAX_CAPACITY_ERROR_MESSAGE if dinosaur_ids.length > max_capacity
+
     dinosaurs = Dinosaur.find(dinosaur_ids)
     dino = dinosaurs.first
 
@@ -28,7 +31,7 @@ class Cage < ApplicationRecord
                                                           end
     end
 
-    dinosaurs << dinosaurs
+    self.dinosaurs << dinosaurs
   end
 
   def dinosaur_count

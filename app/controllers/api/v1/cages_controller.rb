@@ -14,7 +14,8 @@ class Api::V1::CagesController < ApplicationController
 
   def update
     cage = Cage.find(params[:id])
-    cage.add_dinosaurs(cage_params[:dinosaurs])
+    cage.update!(max_capacity: cage_params[:max_capacity])
+    cage.add_dinosaurs(cage_params[:dinosaurs]) if cage_params[:dinosaurs].present?
 
     render json: { message: "Cage updated successfully" }, formats: :json, status: :ok
   rescue StandardError => e
@@ -24,6 +25,6 @@ class Api::V1::CagesController < ApplicationController
   private
 
   def cage_params
-    params.require(:cage).permit(dinosaurs: [])
+    params.require(:cage).permit(:max_capacity, dinosaurs: [])
   end
 end
