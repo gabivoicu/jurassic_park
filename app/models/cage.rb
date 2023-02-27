@@ -14,6 +14,8 @@ class Cage < ApplicationRecord
     end
   end
 
+  # Sets the dinosaurs that belong to a cage. Each time, this method will set all of the dinosaurs so it requires
+  # a complete current list be passed from client, not a "delta" (adding or removing a single dinosaur from cage)
   def add_dinosaurs(dinosaur_ids)
     raise ArgumentError, MAX_CAPACITY_ERROR_MESSAGE if dinosaur_ids.length > max_capacity
 
