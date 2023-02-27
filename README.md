@@ -2,6 +2,7 @@
 - Language
   - Ruby 3.1.0
   - Rails 6
+  - SQLite
 
 ## Development Getting Started
 
@@ -16,7 +17,7 @@
 ## Run it
 
     # Backend (http://localhost:3000)
-    rails s
+    bin/rails s
 
 ## Test It
 
@@ -27,6 +28,25 @@
     bundle exec rspec
 
 Manual testing can be done with a tool like [Postman](https://www.postman.com/downloads/).
+Sample payload:
+
+    # POST http://localhost:3000/api/v1/dinosaurs
+    {
+        "dinosaur": {
+            "name": "Dino 4",
+            "species": "Brachiosaurus"
+        }
+    }
+    # will return 200; removing either key will return a 400 with appropriate message error
+
+    # POST http://localhost:3000/api/v1/cages
+    {
+        "cage": {
+            "max_capacity": 15,
+            "dinosaurs": [1,2]
+        }
+    }
+    # will return 200 if 2 dinosaurs were created before
 
 ## Lint It
 
@@ -40,10 +60,11 @@ I ran out of time to add controller tests (but I tested all endpoints with Postm
 
 To use this app in a production environment I would:
 - containerize using something like Docker and deploy multiple instances
-- use AWS/Heroku to set up automated scaling and deploys where containers are replaced one after the other for stability
-- set up load balancer
-- use Parameter Store for safe storage and sharing across instances of environment variables
+- use Heroku with a Rails builpack and the Heroku CLI, run more dynos via their autoscaling to meed load requirements
+- load balancer handled by Heroku
+- environment variables storage on Heroku
+- switch to Postgres or MySQL database 
 - I would add authentication so that the API can only be accessed by authorized users
 
 ### Additional thoughts
-- It would be useful to add a `max_capacity` value for Cages
+- In a work environment, I would have worked off a branch for the changes but I thought for a interview assignment working on `main` is acceptable.
