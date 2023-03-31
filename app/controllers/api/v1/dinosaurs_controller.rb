@@ -26,6 +26,6 @@ class Api::V1::DinosaursController < ApplicationController
   private
 
   def dinosaur_params
-    params.require(:dinosaur).permit(:name, :species, :cage_id)
+    params.require(:dinosaur).permit(:name, :species_id, :cage_id)
   end
 end
