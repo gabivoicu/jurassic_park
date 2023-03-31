@@ -84,7 +84,7 @@ describe "#update" do
     end
 
     it { expect(response).to have_http_status(:ok) }
-    it { expect(Species.last.average_weight).to eq 50_000 }
+    it { expect(Species.find(1).average_weight).to eq 50_000 }
   end
 
   context "with diet change" do
@@ -93,7 +93,7 @@ describe "#update" do
     end
 
     it { expect(response).to have_http_status(:ok) }
-    it { expect(Species.last.diet).to eq "herbivore" }
+    it { expect(Species.find(1).diet).to eq "herbivore" }
   end
 
   context "with name change" do
@@ -102,6 +102,6 @@ describe "#update" do
     end
 
     it { expect(response).to have_http_status(:ok) }
-    it { expect(Species.last.name).to eq "Sauropoda" }
+    it { expect(Species.find(1).name).to eq "Sauropoda" }
   end
 end
