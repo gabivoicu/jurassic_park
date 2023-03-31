@@ -14,7 +14,7 @@ class Api::V1::CagesController < ApplicationController
 
   def update
     cage = Cage.find(params[:id])
-    cage.update!(max_capacity: cage_params[:max_capacity])
+    cage.update!(max_capacity: cage_params[:max_capacity]) if cage_params[:max_capacity].present?
     cage.add_dinosaurs(cage_params[:dinosaurs]) if cage_params[:dinosaurs].present?
 
     render json: { message: "Cage updated successfully" }, formats: :json, status: :ok
