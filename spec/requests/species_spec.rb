@@ -53,7 +53,7 @@ describe "#create" do
   end
 end
 
-describe "#show" do
+describe "#index" do
   before do
     Species.create(name: "Sauropoda", average_weight: "40000", diet: "herbivore")
     Species.create(name: "T-Rex", average_weight: "40000", diet: "carnivore")
@@ -80,7 +80,7 @@ describe "#update" do
 
   context "with average weight change" do
     before do
-      put "/api/v1/species/?id=1", params: { species: { average_weight: "50000" } }
+      put "/api/v1/species/1/", params: { species: { average_weight: "50000" } }
     end
 
     it { expect(response).to have_http_status(:ok) }
@@ -89,7 +89,7 @@ describe "#update" do
 
   context "with diet change" do
     before do
-      put "/api/v1/species/?id=1", params: { species: { diet: "herbivore" } }
+      put "/api/v1/species/1/", params: { species: { diet: "herbivore" } }
     end
 
     it { expect(response).to have_http_status(:ok) }
@@ -98,7 +98,7 @@ describe "#update" do
 
   context "with name change" do
     before do
-      put "/api/v1/species/?id=1", params: { species: { name: "Sauropoda" } }
+      put "/api/v1/species/1/", params: { species: { name: "Sauropoda" } }
     end
 
     it { expect(response).to have_http_status(:ok) }

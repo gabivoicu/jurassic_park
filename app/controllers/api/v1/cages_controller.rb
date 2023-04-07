@@ -1,5 +1,5 @@
 class Api::V1::CagesController < ApplicationController
-  def show
+  def index
     cages = Cage.all.as_json(methods: [:dinosaurs, :dinosaur_count])
 
     render json: { cages: }, formats: :json

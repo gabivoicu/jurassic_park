@@ -1,5 +1,5 @@
 class Api::V1::DinosaursController < ApplicationController
-  def show
+  def index
     dinosaurs = Dinosaur.all.as_json
 
     render json: { dinosaurs: }, formats: :json

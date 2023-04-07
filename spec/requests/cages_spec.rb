@@ -83,7 +83,7 @@ describe "#create" do
   end
 end
 
-describe "#show" do
+describe "#index" do
   before do
     saura = Species.create(name: "Sauropoda", average_weight: 40_000, diet: "herbivore")
     triceratops = Species.create(name: "Triceratops", average_weight: 40_000, diet: "herbivore")
@@ -122,7 +122,7 @@ describe "#update" do
 
   context "with max_capacity change" do
     before do
-      put "/api/v1/cages/?id=1", params: { cage: { max_capacity: "50000" } }
+      put "/api/v1/cages/1/", params: { cage: { max_capacity: "50000" } }
     end
 
     it { expect(response).to have_http_status(:ok) }
@@ -131,7 +131,7 @@ describe "#update" do
 
   context "with dinosaurs change" do
     before do
-      put "/api/v1/cages/?id=1", params: { cage: { dinosaurs: [1, 2] } }
+      put "/api/v1/cages/1/", params: { cage: { dinosaurs: [1, 2] } }
     end
 
     it { expect(response).to have_http_status(:ok) }

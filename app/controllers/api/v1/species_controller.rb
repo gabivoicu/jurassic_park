@@ -1,5 +1,5 @@
 class Api::V1::SpeciesController < ApplicationController
-  def show
+  def index
     species = Species.all.as_json
 
     render json: { species: }, formats: :json

@@ -21,7 +21,7 @@ describe "#create" do
   end
 end
 
-describe "#show" do
+describe "#index" do
   before do
     saura = Species.create(id: 1, name: "Sauropoda", average_weight: "40000", diet: "herbivore")
     Dinosaur.create(name: "Dino", species: saura)
@@ -52,7 +52,7 @@ describe "#update" do
 
   context "with name change" do
     before do
-      put "/api/v1/dinosaurs/?id=1", params: { dinosaur: { name: "Mighty Dino" } }
+      put "/api/v1/dinosaurs/1/", params: { dinosaur: { name: "Mighty Dino" } }
     end
 
     it { expect(response).to have_http_status(:ok) }
@@ -61,7 +61,7 @@ describe "#update" do
 
   context "with species change" do
     before do
-      put "/api/v1/dinosaurs/?id=1", params: { dinosaur: { species_id: 1 } }
+      put "/api/v1/dinosaurs/1/", params: { dinosaur: { species_id: 1 } }
     end
 
     it { expect(response).to have_http_status(:ok) }
