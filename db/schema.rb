@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_25_002620) do
+ActiveRecord::Schema.define(version: 2023_03_29_204954) do
 
   create_table "cages", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -20,11 +20,20 @@ ActiveRecord::Schema.define(version: 2023_02_25_002620) do
 
   create_table "dinosaurs", force: :cascade do |t|
     t.string "name"
-    t.integer "species"
     t.integer "cage_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "species_id"
     t.index ["cage_id"], name: "index_dinosaurs_on_cage_id"
+    t.index ["species_id"], name: "index_dinosaurs_on_species_id"
+  end
+
+  create_table "species", force: :cascade do |t|
+    t.string "name"
+    t.integer "diet"
+    t.decimal "average_weight"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "dinosaurs", "cages"

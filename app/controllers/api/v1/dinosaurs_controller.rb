@@ -1,5 +1,5 @@
 class Api::V1::DinosaursController < ApplicationController
-  def show
+  def index
     dinosaurs = Dinosaur.all.as_json
 
     render json: { dinosaurs: }, formats: :json
@@ -26,6 +26,6 @@ class Api::V1::DinosaursController < ApplicationController
   private
 
   def dinosaur_params
-    params.require(:dinosaur).permit(:name, :species, :cage_id)
+    params.require(:dinosaur).permit(:name, :species_id, :cage_id)
   end
 end

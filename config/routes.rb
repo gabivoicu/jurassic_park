@@ -5,8 +5,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resource :dinosaurs
-      resource :cages
+      resources :dinosaurs
+      resources :cages
+      resources :species
     end
   end
 end
